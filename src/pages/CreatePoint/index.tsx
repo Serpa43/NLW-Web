@@ -1,7 +1,7 @@
 import React, { useEffect, useState, ChangeEvent, FormEvent } from 'react';
 import './styles.css';
 import logo from '../../assets/logo.svg';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { FiArrowLeft } from 'react-icons/fi';
 import { Map, TileLayer, Marker } from 'react-leaflet';
 import api from '../../services/api';
@@ -34,6 +34,7 @@ const CreatePoint = () => {
     const [selectedPosition, setSelectedPosition] = useState<[number, number]>([0,0]);
     const [initialPosition, setInitialPosition] = useState<[number, number]>([0,0]);
     const [selectedItems, setSelectedItems] = useState<number[]>([]);
+    const history = useHistory();
     const [formData, setFormData] = useState({
         name: '',
         email:'',
@@ -134,6 +135,7 @@ const CreatePoint = () => {
         }
             await api.post('points', data);
             alert(`Ponto de Coleta ${name} Criado com Sucesso`);
+            history.push('/')
     }
 
 
